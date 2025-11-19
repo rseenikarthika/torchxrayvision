@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prediction Results</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        h1 { color: #333; }
+        table { border-collapse: collapse; width: 50%; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .latency { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Prediction Results</h1>
+
+    <table>
+        <tr>
+            <th>Pathology</th>
+            <th>Probability</th>
+        </tr>
+        {% for label, prob in results %}
+        <tr>
+            <td>{{ label }}</td>
+            <td>{{ "%.2f"|format(prob*100) }}%</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <div class="latency">
+        <p>Preprocessing Time: {{ "%.3f"|format(preprocess_time) }} s</p>
+        <p>Inference Time: {{ "%.3f"|format(inference_time) }} s</p>
+    </div>
+
+    <br>
+    <a href="/">⬅ Upload another image</a>
+</body>
+</html>
